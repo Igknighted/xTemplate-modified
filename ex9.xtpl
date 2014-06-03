@@ -1,0 +1,11 @@
+<!-- BEGIN: header -->
+This is the header <br>
+<!-- END: header -->
+
+<!-- BEGIN: page_content -->
+{username} wrote {dialog}<br>
+<!-- END: page_content -->
+
+<!-- BEGIN: footer -->
+This is the footer <br>
+<!-- END: footer -->
