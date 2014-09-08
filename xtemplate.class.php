@@ -1167,7 +1167,15 @@ class XTemplate {
      * @return string
      */
 	protected function _getfile ($file) {
-
+		if(defined('BASEPATH')){
+			if(!preg_match('/^'.preg_quote('/', BASEPATH).'/', $file)){
+				$file = str_replace('//', '/', BASEPATH.'/'.$file);
+			}
+			
+			//$file = str_replace('//', '/', $file);
+		}
+		
+		
 		if (!isset($file)) {
 			// JC 19/12/02 added $file to error message
 			$this->_set_error('!isset file name!' . $file);
