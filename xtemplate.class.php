@@ -565,6 +565,21 @@ class XTemplate {
 
 		$var_array = array();
 
+		/* find & run functions Sam Peterson 2015-04-09 */
+		preg_match_all("|".$this->tag_start_delim."EVAL:(.*?)".$this->tag_end_delim."|", $copy, $eval_array);
+
+		foreach($eval_array[1] as $k => $eval_args){
+			$eval_statement = $eval_array[0][$k];
+
+			ob_start();
+			eval($eval_args);
+			$evaluation = ob_get_contents();
+			ob_end_clean();
+
+			$copy = str_replace($eval_statement, $evaluation, $copy);
+		}
+
+
 		/* find & replace variables+blocks */
 		preg_match_all("|" . $this->tag_start_delim . "([A-Za-z0-9\._]+?" . $this->comment_preg . ")" . $this->tag_end_delim. "|", $copy, $var_array);
 
@@ -691,7 +706,11 @@ class XTemplate {
 					$copy = substr($copy, 1);
 				}
 			}
-		}
+		} // ends foreach
+
+
+		/* Remove leading whitespace from the blocks for better whitespace control - Sam Peterson 2015-04-09 */
+		$copy = ltrim($copy);
 
 		if (isset($this->parsed_blocks[$bname])) {
 			$this->parsed_blocks[$bname] .= $copy;
