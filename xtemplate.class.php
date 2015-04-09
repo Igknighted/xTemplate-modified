@@ -359,6 +359,11 @@ class XTemplate {
 	 * @param string $tag_start {
 	 * @param string $tag_end }
 	 */
+	
+	/* Just made an alias for the restart function, because "load" makes more sense to me - Sam Peterson 2015-04-09 */
+	public function load ($file, $tpldir = '', $files = null, $mainblock = 'main', $autosetup = true, $tag_start = '{', $tag_end = '}') {
+		return $this->restart($file, $tpldir, $files, $mainblock, $autosetup, $tag_start, $tag_end);
+	}
 	public function restart ($file, $tpldir = '', $files = null, $mainblock = 'main', $autosetup = true, $tag_start = '{', $tag_end = '}') {
 
 		$this->filename = $file;
