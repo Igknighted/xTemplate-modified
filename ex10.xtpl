@@ -1,0 +1,4 @@
+<!-- BEGIN: main -->
+The following output was evaluated before running:
+{EVAL: echo('Hello World');}
+<!-- END: main -->
